@@ -4,10 +4,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export interface AppConfig {
-  equatorialChatName: string;
-  targetUc: string;
-  targetReference: string;
+  equatorialPhoneNumber: string;
   registeredEmail: string;
+  csvDir: string;
   downloadDir: string;
   sessionDir: string;
   messageTimeoutMs: number;
@@ -58,10 +57,9 @@ export const loadConfig = (): AppConfig => {
   }
 
   return {
-    equatorialChatName: requiredString("EQUATORIAL_CHAT_NAME"),
-    targetUc: requiredString("TARGET_UC"),
-    targetReference: requiredString("TARGET_REFERENCE"),
+    equatorialPhoneNumber: requiredString("EQUATORIAL_PHONE_NUMBER"),
     registeredEmail: requiredString("REGISTERED_EMAIL"),
+    csvDir: resolveProjectPath(process.env.CSV_DIR?.trim() || "./csvs"),
     downloadDir: resolveProjectPath(process.env.DOWNLOAD_DIR?.trim() || "./downloads"),
     sessionDir: resolveProjectPath(process.env.SESSION_DIR?.trim() || "./sessions"),
     messageTimeoutMs: numberFromEnv("MESSAGE_TIMEOUT_MS", 90000),
